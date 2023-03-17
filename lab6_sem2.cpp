@@ -3,15 +3,51 @@
 #include <iostream>
 using namespace std;
 
+struct List {
+    int data;
+    List* next;
+};
+void FillStruct(List* Struct, int size);
+void PrintStruct(List* Struct, int size);
+
+
 int main()
 {
-    struct Vklad {
-        char surname[20];
-        long int sum;
-        Vklad* next;
-    };
+    int length;
+    
+    cout << "Enter amount of elements: ";
+    cin >> length;
+    List *One = new List[length];
 
-    return 0;
+    FillStruct(One, length);
+
+    PrintStruct(One, length);
+
+    return 0x0;
+}
+
+void FillStruct(List *Struct, int size) {
+    cout << "Enter number of list items: " << endl;
+    for (int i = 1; i <= size; i++)
+    {
+        cin >> (Struct[i-1]).data;
+        if (i != size) {
+            (Struct[i - 1]).next = &(Struct[i]);
+        }
+        else {
+            (Struct[i - 1]).next = &(Struct[0]);
+        }
+
+        cout << (Struct[i-1]).next << endl;
+    }
+}
+
+void PrintStruct(List* Struct, int size) {
+    for (int i = 1; i <= size; i++)
+    {
+        cout << (Struct[i-1]).data << "\t";
+        (Struct[i-1]).next = (Struct[i]).next;
+    }
 }
 
 // Запуск программы: CTRL+F5 или меню "Отладка" > "Запуск без отладки"
