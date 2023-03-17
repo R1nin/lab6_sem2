@@ -7,9 +7,9 @@ struct List {
     int data;
     List* next;
 };
-void FillStruct(List* Struct, int size);
-void PrintStruct(List* Struct, int size);
-
+void CreateList(List* Struct, int size);
+void PrintList(List* Struct, int size);
+void PopListItem(List* Struct, int value);
 
 int main()
 {
@@ -19,14 +19,14 @@ int main()
     cin >> length;
     List *One = new List[length];
 
-    FillStruct(One, length);
+    CreateList(One, length);
 
-    PrintStruct(One, length);
+    PrintList(One, length);
 
     return 0x0;
 }
 
-void FillStruct(List *Struct, int size) {
+void CreateList(List *Struct, int size) {
     cout << "Enter number of list items: " << endl;
     for (int i = 1; i <= size; i++)
     {
@@ -37,17 +37,20 @@ void FillStruct(List *Struct, int size) {
         else {
             (Struct[i - 1]).next = &(Struct[0]);
         }
-
-        cout << (Struct[i-1]).next << endl;
+        //cout << (Struct[i - 1]).next << endl;
     }
 }
 
-void PrintStruct(List* Struct, int size) {
+void PrintList(List* Struct, int size) {
     for (int i = 1; i <= size; i++)
     {
         cout << (Struct[i-1]).data << "\t";
-        (Struct[i-1]).next = (Struct[i]).next;
+        (Struct[i - 1]).next = (Struct[i]).next;
     }
+}
+
+void PopListItem(List* Struct, int value) {
+
 }
 
 // Запуск программы: CTRL+F5 или меню "Отладка" > "Запуск без отладки"
