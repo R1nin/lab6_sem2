@@ -7,50 +7,80 @@ struct List {
     int data;
     List* next;
 };
-void CreateList(List* Struct, int size);
-void PrintList(List* Struct, int size);
-void PopListItem(List* Struct, int value);
+
+
+List *head ,*NewList;
+
+void AddListItem();
+void ReversList();
+void PrintList();
+
 
 int main()
 {
-    int length;
-    
-    cout << "Enter amount of elements: ";
-    cin >> length;
-    List *One = new List[length];
+    AddListItem();
 
-    CreateList(One, length);
-
-    PrintList(One, length);
+    PrintList();
+    cout << endl;
+    ReversList();
 
     return 0x0;
 }
 
-void CreateList(List *Struct, int size) {
-    cout << "Enter number of list items: " << endl;
-    for (int i = 1; i <= size; i++)
+void AddListItem() {
+
+    List* p;
+    List* last;
+    int a;
+    
+    cout << " Creating a ring list \n Enter numbers via 'Enter'\n";
+
+    cout << "Enter amount of values:";
+    cin >> a;
+    if (a <= 0)
+        exit(5000);
+    p = new List;
+    head = p;
+    cin >> p->data;
+    for (int i = 1; i < a; i++)
     {
-        cin >> (Struct[i-1]).data;
-        if (i != size) {
-            (Struct[i - 1]).next = &(Struct[i]);
-        }
-        else {
-            (Struct[i - 1]).next = &(Struct[0]);
-        }
-        //cout << (Struct[i - 1]).next << endl;
+        last = new List;
+        cin >> last->data;
+        p->next = last;
+        p = last;
     }
+    last->next = head;
+
+    cout << "End of input\n";
 }
 
-void PrintList(List* Struct, int size) {
-    for (int i = 1; i <= size; i++)
-    {
-        cout << (Struct[i-1]).data << "\t";
-        (Struct[i - 1]).next = (Struct[i]).next;
-    }
-}
+/*
+void ReversList() {
+    List* last, * l, *newlist;
 
-void PopListItem(List* Struct, int value) {
+ 
+    last = l = head;
+    do {
+        do {
+            l = l->next;
+        } while (l->next != last);
+        last = l;
+        newlist->data = last->data;
+        newlist->next = new List;
+        newlist = newlist->next;
+        cout << last->data << " ";
+    } while (last != head);
+}*/
 
+void PrintList() {
+    List* sh = head;
+    cout << "List: " << endl;
+    if (sh == nullptr)
+        return;
+    do {
+        cout << sh->data << '\t';
+        sh = sh->next;
+    } while (sh != head);
 }
 
 // Запуск программы: CTRL+F5 или меню "Отладка" > "Запуск без отладки"
