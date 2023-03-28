@@ -9,40 +9,44 @@ struct List {
 };
 
 
-List *head ,*NewList;
+List* head, * new_head;
 
 void AddListItem();
 void ReversList();
 void PrintList();
+void ReverseList();
 
 
-int main()
+int main(int argc, char* argv[])
 {
     AddListItem();
 
     PrintList();
-    cout << endl;
-    ReversList();
 
+    cout << endl;
+
+    ReverseList();
+
+    PrintList();
     return 0x0;
 }
 
 void AddListItem() {
 
     List* p;
-    List* last;
-    int a;
+    List* last{};
+    int amount;
     
-    cout << " Creating a ring list \n Enter numbers via 'Enter'\n";
+    cout << "Creating a ring list \nEnter numbers via 'Enter'\n";
 
-    cout << "Enter amount of values:";
-    cin >> a;
-    if (a <= 0)
+    cout << "Enter amount of values:" << endl;
+    cin >> amount;
+    if (amount <= 0)
         exit(5000);
     p = new List;
     head = p;
     cin >> p->data;
-    for (int i = 1; i < a; i++)
+    for (int i = 1; i < amount; i++)
     {
         last = new List;
         cin >> last->data;
@@ -51,33 +55,32 @@ void AddListItem() {
     }
     last->next = head;
 
+
     cout << "End of input\n";
 }
 
-/*
-void ReversList() {
-    List* last, * l, *newlist;
 
- 
-    last = l = head;
+void ReverseList() {
+    List* pred = nullptr;
+    List* current = head;
+
     do {
-        do {
-            l = l->next;
-        } while (l->next != last);
-        last = l;
-        newlist->data = last->data;
-        newlist->next = new List;
-        newlist = newlist->next;
-        cout << last->data << " ";
-    } while (last != head);
-}*/
+        List* next = current->next;
+        current->next = pred;
+        pred = current;
+        current = next;
+    } while (current != head);
+
+    head = pred;
+}
 
 void PrintList() {
     List* sh = head;
     cout << "List: " << endl;
-    if (sh == nullptr)
-        return;
+
     do {
+        if (sh == nullptr)
+            return;
         cout << sh->data << '\t';
         sh = sh->next;
     } while (sh != head);
