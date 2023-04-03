@@ -13,18 +13,19 @@ List* head, * new_head;
 void AddListItem();
 void PrintList();
 void ReverseList();
+void DeleteList();
 
-int main(int argc, char* argv[])
+int main()
 {
     AddListItem();
 
     PrintList();
 
-    cout << endl;
-
     ReverseList();
 
     PrintList();
+
+    DeleteList();
     return 0x0;
 }
 
@@ -38,8 +39,10 @@ void AddListItem() {
 
     cout << "Enter amount of values:" << endl;
     cin >> amount;
-    if (amount <= 0)
+    if (amount <= 0) {
+        cout << "Error!!!";
         exit(5000);
+    }
     p = new List;
     head = p;
     cin >> p->data;
@@ -61,6 +64,8 @@ void ReverseList() {
     List* pred = nullptr;
     List* current = head;
 
+    cout << "Reverse list: " << endl;
+
     do {
         List* next = current->next;
         current->next = pred;
@@ -81,6 +86,17 @@ void PrintList() {
         cout << sh->data << '\t';
         sh = sh->next;
     } while (sh != head);
+    cout << endl;
+}
+
+void DeleteList() {
+    List* f = head, *next;
+    do {
+        next = f->next;
+        delete f;
+        f = next;
+    } while (f != nullptr);
+    head = nullptr;
 }
 
 // Запуск программы: CTRL+F5 или меню "Отладка" > "Запуск без отладки"
